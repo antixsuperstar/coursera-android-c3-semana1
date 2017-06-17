@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/def_padding"
                 android:text="@string/fill_text"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -44,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
+                android:textColor="@color/colorPrimaryDark"
                 android:textOff="apagado... :("
                 android:textOn="¡Encendido! :D" />
 
