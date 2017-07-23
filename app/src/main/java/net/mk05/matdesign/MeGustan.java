@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MeGustan extends AppCompatActivity {
 
@@ -23,23 +24,14 @@ public class MeGustan extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GlobalState gs = (GlobalState)getApplication();
-
-        /**
-         *  Recorro las mascotas y creo otro ArrayList solamente con las que
-         *  me gustan.
-         */
-        ArrayList<Mascota> mascotasPreferidas = new ArrayList<>();
-        for( int i=0; i < gs.misMascotas.size(); i++ ) {
-            if( gs.misMascotas.get(i).getMeGusta() ) {
-                mascotasPreferidas.add(gs.misMascotas.get(i));
-            }
-        }
+        ArrayList<Mascota> listaInversa = (ArrayList)gs.ultimasMascotasFavoritas.clone();
 
         RecyclerView mgRV = (RecyclerView)findViewById(R.id.meGustan_rvMeGustan);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         mgRV.setLayoutManager(llm);
-        mgRV.setAdapter(new MascotaAdaptador(mascotasPreferidas, this));
+        Collections.reverse(listaInversa); // Mostrar primero la más recientemente "gustada"
+        mgRV.setAdapter(new MascotaAdaptador(listaInversa, this));
     }
 }

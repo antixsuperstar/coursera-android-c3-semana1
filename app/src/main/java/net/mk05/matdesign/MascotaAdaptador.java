@@ -2,7 +2,6 @@ package net.mk05.matdesign;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by marc05 on 19/07/17.
@@ -34,29 +34,25 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     }
 
     @Override
-    public void onBindViewHolder(final MascotaViewHolder holder, int position) {
+    public void onBindViewHolder(final MascotaViewHolder holder, final int position) {
         final Mascota estaMascota = mascotas.get(position);
         holder.txtTotalMeGusta.setText(String.valueOf(estaMascota.getCuantosMeGusta()));
         holder.txtNombreMascota.setText(estaMascota.getNombre());
         holder.imgMascota.setImageResource(estaMascota.getFoto());
 
-        if( estaMascota.getMeGusta() ) {
-            holder.imgMeGusta.setImageResource(R.drawable.bone_color);
-        } else {
-            holder.imgMeGusta.setImageResource(R.drawable.bone_bw);
-        }
-
         holder.btnMeGusta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                estaMascota.setMeGusta(!estaMascota.getMeGusta());
-                if( estaMascota.getMeGusta() ) {
-                    holder.imgMeGusta.setImageResource(R.drawable.bone_color);
+                ArrayList<Mascota> favoritas = ((GlobalState)activity.getApplication()).ultimasMascotasFavoritas;
+
+                if( favoritas.size() >= 5 ) {
+                    do {
+                        favoritas.remove(0);
+                    } while (favoritas.size() >= 5);
                 } else {
-                    holder.imgMeGusta.setImageResource(R.drawable.bone_bw);
+                    favoritas.add(estaMascota);
                 }
-                Toast.makeText(view.getContext(), "Ahora " + (estaMascota.getMeGusta()?"sí":"no") +
-                        " te gusta '" + estaMascota.getNombre() + "'", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Ahora te gusta '" + estaMascota.getNombre() + "'", Toast.LENGTH_SHORT).show();
             }
         });
     }

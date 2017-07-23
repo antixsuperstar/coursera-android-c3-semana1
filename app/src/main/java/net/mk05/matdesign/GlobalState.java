@@ -2,6 +2,8 @@ package net.mk05.matdesign;
 
 import android.app.Application;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Marcos on 18/07/2017.
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 class Mascota
 {
     protected String nombre;
-    protected boolean meGusta;
     protected int cuantosMeGusta;
     protected int foto;
 
@@ -18,7 +19,6 @@ class Mascota
         this.nombre = nombre;
         this.cuantosMeGusta = cuantosGusta;
         this.foto = foto;
-        this.meGusta = false;
     }
 
     public String getNombre() {
@@ -40,14 +40,6 @@ class Mascota
     public void setFoto(int foto) {
         this.foto = foto;
     }
-
-    public void setMeGusta(boolean ahora) {
-        this.meGusta = ahora;
-    }
-
-    public boolean getMeGusta() {
-        return this.meGusta;
-    }
 }
 
 /**
@@ -59,6 +51,7 @@ public class GlobalState extends Application {
     // Genera un número aleatorio entre 0 y 100
     private int likes() { return (int) (20*Math.random()); }
     public ArrayList<Mascota> misMascotas;
+    public ArrayList<Mascota> ultimasMascotasFavoritas;
 
     @Override
     public void onCreate() {
@@ -73,5 +66,7 @@ public class GlobalState extends Application {
         misMascotas.add(new Mascota("Odie", likes(), R.drawable.dog_odie));
         misMascotas.add(new Mascota("Ayudante de Santa", likes(), R.drawable.dog_santa_s_little_helper));
         misMascotas.add(new Mascota("Caliente", likes(), R.drawable.dog_hotdog));
+
+        ultimasMascotasFavoritas = new ArrayList<>();
     }
 }
