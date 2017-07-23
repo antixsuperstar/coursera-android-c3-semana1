@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="def_padding">15dp</dimen>
+    <dimen name="elementMargin">10dp</dimen>
+    <dimen name="textoTitulo">15sp</dimen>
+    <dimen name="iconoInterno">30sp</dimen>
+    <dimen name="elevacion_ActionBar">10dp</dimen>
+</resources>
